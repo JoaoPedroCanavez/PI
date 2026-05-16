@@ -1,7 +1,5 @@
-# ==========================================
-# 1. AMBIENTE VIRTUAL E DEPENDÊNCIAS
-# ==========================================
-# Nunca devemos subir os binários do Python para o repositório.
+#  AMBIENTE VIRTUAL E DEPENDÊNCIAS
+
 venv/
 env/
 .venv/
@@ -11,20 +9,18 @@ Lib/
 .vscode/
 logs/
 
-# ==========================================
-# 2. VARIÁVEIS DE AMBIENTE E SEGURANÇA (CRÍTICO)
-# ==========================================
-# Onde ficam suas senhas do Mongo, Secret Key do Django, etc.
+
+#  VARIÁVEIS DE AMBIENTE E SEGURANÇA (CRÍTICO)
+
 .env
 .env.local
 .env.*
 *.pem
 secrets.json
 
-# ==========================================
-# 3. CACHE DO PYTHON E COMPILAÇÕES
-# ==========================================
-# Arquivos gerados automaticamente pela máquina que rola o código.
+
+#  CACHE DO PYTHON E COMPILAÇÕES
+
 __pycache__/
 *.py[cod]
 *$py.class
@@ -44,17 +40,16 @@ wheels/
 .installed.cfg
 *.egg
 
-# ==========================================
-# 4. BANCO DE DADOS LOCAL E ARQUIVOS DE MÍDIA
-# ==========================================
-# Mesmo usando MongoDB, o Django cria o sqlite3 por padrão se não configurado.
+
+#  BANCO DE DADOS LOCAL E ARQUIVOS DE MÍDIA
+
 db.sqlite3
 db.sqlite3-journal
 media/
 
-# ==========================================
-# 5. LOGS E TESTES
-# ==========================================
+
+# LOGS E TESTES
+
 *.log
 .pytest_cache/
 htmlcov/
@@ -65,10 +60,9 @@ htmlcov/
 nosetests.xml
 coverage.xml
 
-# ==========================================
-# 6. CONFIGURAÇÕES DE IDE E SISTEMA OPERACIONAL
-# ==========================================
-# Evita que configurações do seu PC poluam o repositório dos colegas.
+
+#  CONFIGURAÇÕES DE IDE E SISTEMA OPERACIONAL
+
 .vscode/
 .idea/
 *.swp

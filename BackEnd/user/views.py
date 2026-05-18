@@ -53,7 +53,11 @@ class LoginView(TokenObtainPairView):
         data = serializer.validated_data
         
         response = Response(
-            {"message": "Login realizado com sucesso!"}, 
+            {
+                "message": "Login realizado com sucesso!",
+                "role": serializer.user.role,
+                "username": serializer.user.username
+            }, 
             status=status.HTTP_200_OK
         )
         
@@ -91,7 +95,6 @@ class CustomTokenRefreshView(TokenRefreshView):
         
         return set_auth_cookies(response, data['access'], data.get('refresh'))
 
-
 class LogoutView(APIView):
     
     permission_classes = [IsAuthenticated]
@@ -118,8 +121,35 @@ class LogoutView(APIView):
     
 
 
+class UserMeView(APIView):
+    permission_classes = [IsAuthenticated] 
+
+    def get(self, request):
+        serializer = UserResponseSerializer(request.user)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def patch(self, request):
+        if request.user.role != 'aluno':
+            return Response({"error": "Apenas alunos vinculam instrutores."}, status=status.HTTP_400_BAD_REQUEST)
+        
+        instrutor_id = request.data.get('instrutor_id')
+        if instrutor_id:
+            try:
+                from django.contrib.auth import get_user_model
+                UserModel = get_user_model()
+                instrutor = UserModel.objects.get(id=instrutor_id, role='instrutor')
+                request.user.instrutor = instrutor
+                request.user.save()
+            except UserModel.DoesNotExist:
+                return Response({"error": "Instrutor não encontrado."}, status=status.HTTP_404_NOT_FOUND)
+        else:
+            request.user.instrutor = None
+            request.user.save()
+            
+        return Response(UserResponseSerializer(request.user).data, status=status.HTTP_200_OK)
+
+
 class UserListCreateView(APIView):
-    
     def get_permissions(self):
         if self.request.method == 'POST':
             return [AllowAny()]
@@ -127,10 +157,19 @@ class UserListCreateView(APIView):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.user_service = UserService()
+        from django.contrib.auth import get_user_model
+        self.UserModel = get_user_model()
+        
+        # CORREÇÃO: Inicializa o serviço para que o método post volte a funcionar!
+        self.user_service = UserService() 
 
     def get(self, request):
-        users = self.user_service.get_all_users()
+        # FILTRO DE SEGURANÇA CONTEXTUAL:
+        if request.user.role == 'instrutor':
+            users = self.UserModel.objects.filter(role='aluno', instrutor=request.user)
+        else:
+            users = self.UserModel.objects.filter(role='instrutor')
+            
         serializer = UserResponseSerializer(users, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 

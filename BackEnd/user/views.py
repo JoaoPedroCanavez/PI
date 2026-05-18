@@ -53,7 +53,11 @@ class LoginView(TokenObtainPairView):
         data = serializer.validated_data
         
         response = Response(
-            {"message": "Login realizado com sucesso!"}, 
+            {
+                "message": "Login realizado com sucesso!",
+                "role": serializer.user.role,
+                "username": serializer.user.username
+            }, 
             status=status.HTTP_200_OK
         )
         
@@ -91,6 +95,15 @@ class CustomTokenRefreshView(TokenRefreshView):
         
         return set_auth_cookies(response, data['access'], data.get('refresh'))
 
+class UserMeView(APIView):
+
+    permission_classes = [IsAuthenticated] 
+
+    def get(self, request):
+
+        serializer = UserResponseSerializer(request.user)
+        
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 class LogoutView(APIView):
     

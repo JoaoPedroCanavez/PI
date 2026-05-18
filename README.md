@@ -1,6 +1,6 @@
 # GymTrack Pro 🏋️‍♂️💪
 
-[gif do sistema duncionando](demonstracao.gif)
+[![gif do sistema funcionando](demonstracao.gif)](demonstracao.gif)
 
 ### Sistema SaaS de Gestão de Treinos e Evolução de Cargas
 

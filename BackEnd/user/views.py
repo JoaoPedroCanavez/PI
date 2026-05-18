@@ -159,8 +159,12 @@ class UserListCreateView(APIView):
         super().__init__(**kwargs)
         from django.contrib.auth import get_user_model
         self.UserModel = get_user_model()
+        
+        # CORREÇÃO: Inicializa o serviço para que o método post volte a funcionar!
+        self.user_service = UserService() 
 
     def get(self, request):
+        # FILTRO DE SEGURANÇA CONTEXTUAL:
         if request.user.role == 'instrutor':
             users = self.UserModel.objects.filter(role='aluno', instrutor=request.user)
         else:

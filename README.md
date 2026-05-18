@@ -1,4 +1,7 @@
 # GymTrack Pro 🏋️‍♂️💪
+
+[gif do sistema duncionando](demonstracao.gif)
+
 ### Sistema SaaS de Gestão de Treinos e Evolução de Cargas
 
 O **GymTrack Pro** é uma plataforma SaaS multi-tenant comportamental desenvolvida especificamente para academias e personal trainers. O sistema resolve o problema de gestão de fichas de musculação abandonando o modelo tradicional de fichas estáticas e adotando um ecossistema dinâmico dividido em duas frentes de atuação (Instrutor e Aluno) com isolamento rigoroso de contexto, segurança avançada e rastreamento histórico de performance.

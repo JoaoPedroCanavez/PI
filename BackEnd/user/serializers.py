@@ -6,6 +6,8 @@ class UserResponseSerializer(serializers.Serializer):
     email = serializers.EmailField()
     role = serializers.CharField()
     is_active = serializers.BooleanField()
+    # Expõe o ID do instrutor na resposta
+    instrutor_id = serializers.IntegerField(source='instrutor.id', allow_null=True, read_only=True)
 
 class UserCreateUpdateSerializer(serializers.Serializer):
     username = serializers.CharField(max_length=150)

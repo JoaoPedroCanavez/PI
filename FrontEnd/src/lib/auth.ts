@@ -21,6 +21,21 @@ export interface UserMeResponse {
   role: "instrutor" | "aluno";
 }
 
+export interface UserMeResponse {
+  id: number;
+  username: string;
+  email: string;
+  role: "instrutor" | "aluno";
+  instrutor_id: number | null; // Adicionado contrato de vinculação
+}
+
+export async function vincularInstrutor(idInstrutor: number | null) {
+  return fetchApi<UserMeResponse>('/user/me/', {
+    method: 'PATCH',
+    body: JSON.stringify({ instrutor_id: idInstrutor }),
+  });
+}
+
 export async function loginUser(credentials: LoginCredentials) {
   return fetchApi<LoginResponse>('/user/login/', {
     method: 'POST',

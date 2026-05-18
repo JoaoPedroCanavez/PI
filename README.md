@@ -62,8 +62,6 @@ Antes de começar, certifique-se de que tem instalado na sua máquina:
 1.  Aceda à pasta do servidor de dados:
     ```
 ```text?code_stdout&code_event_index=2
-README.md gerado com sucesso!
-
 ```bash
     cd BackEnd
     ```

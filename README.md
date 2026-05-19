@@ -8,7 +8,7 @@ O **GymTrack Pro** é uma plataforma SaaS multi-tenant comportamental desenvolvi
 
 ---
 
-## 📋 Funcionalidades Principais
+## 📋 Funcionalidades Principai
 
 ### 🖥️ Módulo do Instrutor (Gestor Técnico)
 * **Biblioteca de Templates Reutilizáveis:** O instrutor não precisa recriar treinos do zero para cada aluno. Ele monta uma biblioteca de modelos abstratos (Ex: *Hipertrofia Avançada A*, *Cardio Iniciante*) e os reutiliza.
